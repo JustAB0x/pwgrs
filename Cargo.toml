@@ -1,0 +1,12 @@
+[package]
+name = "pwgen"
+version = "0.1.0"
+authors = ["Patrick Muff <muff.pa@gmail.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rand = "0.7.3"
+clap = "4.5.7"
+clipboard = "0.5.0"
