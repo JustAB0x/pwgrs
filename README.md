@@ -1,4 +1,4 @@
-# @dislick/pwgen
+# @pwgen
 
 CLI password generator with smart defaults and a built-in copy-to-clipboard feature.
 
