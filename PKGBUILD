@@ -14,7 +14,8 @@ sha512sums=('3559703a046bb5a8c80da93e79f94663359b1b24ccb2f1c890acc5872899e9e5942
 options=(!lto)
 
 prepare() {
-    cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
+  cd "$pkgname-$pkgver"
+  cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
 }
 
 build() {
