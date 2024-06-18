@@ -1,11 +1,11 @@
 use clipboard::ClipboardContext;
 use clipboard::ClipboardProvider;
-use pwgen::*;
+use pwgrs::*;
 use std::process;
 
 fn main() {
   // Parse cli arguments
-  let options = pwgen::Options::from_args();
+  let options = pwgrs::Options::from_args();
 
   match run(&options) {
     Ok(passwords) => {

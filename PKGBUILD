@@ -1,9 +1,9 @@
 # Maintainer: Box <box@sysn.co.uk>
 
-pkgname=pwgen-rs
+pkgname=pwgrs
 pkgver=1.1.0
 pkgrel=1
-pkgdesc="$pkgname is a command line tool which allows to creat secure passwords/secrets from the command line."
+pkgdesc="pwgrs is a command line tool which allows to creat secure passwords/secrets from the command line, written in rust, duh."
 arch=('x86_64')
 url="https://github.com/JustAB0x/pwgen-rs/"
 license=('MIT')
@@ -27,7 +27,7 @@ build() {
 package() {
   cd "$pkgname-$pkgver"
 
-  install -Dm755 "target/release/$pkgname" "$pkgdir/usr/bin/pwgen"
+  install -Dm755 "target/release/$pkgname" "$pkgdir/usr/bin/$pkgname"
 
   install -Dm644 "README.md" "$pkgdir/usr/share/doc/${pkgname}/README.md"
   install -Dm644 "LICENSE-MIT" "$pkgdir/usr/share/licenses/${pkgname}/LICENSE-MIT"
