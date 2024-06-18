@@ -10,7 +10,7 @@ license=('MIT')
 depends=('gcc-libs')
 makedepends=('rust')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/JustAB0x/$pkgname/archive/v$pkgver.tar.gz")
-sha512sums=('f5c68215f31e1c93c2817d853dc1da81932f25730256759bf8190375f2a789ed498ecc3c22c6a0f10d728460633151d7bfe9ff281181cde0216e03245d6f8886')
+sha512sums=('3559703a046bb5a8c80da93e79f94663359b1b24ccb2f1c890acc5872899e9e594274674903567c321022e7058f810a2642b03fa5e46860c6683b59998f9ad01')
 options=(!lto)
 
 prepare() {
