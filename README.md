@@ -7,7 +7,7 @@ CLI password generator with smart defaults and a built-in copy-to-clipboard feat
 ```
 Secure password generator
 
-Usage: pwgen [OPTIONS] [COMMAND]
+Usage: pwgrs [OPTIONS] [COMMAND]
 
 Commands:
   secret  Creates secret with at least 256 bits of entropy
@@ -27,88 +27,88 @@ Options:
 
 ## Defaults
 
-If you run `pwgen` without a `--length` option it will determine the length based on the available charsets to get to **at least 256 bits of entropy**. The less different characters that are available through those charsets, the longer the resulting password will get.
+If you run `pwgrs` without a `--length` option it will determine the length based on the available charsets to get to **at least 256 bits of entropy**. The less different characters that are available through those charsets, the longer the resulting password will get.
 
 Without charset flags (`-a`, `-A`, `-n`, or `-s`) present, it uses all possible charsets.
 
 ## Examples
 
-#### `pwgen`
+#### `pwgrs`
 
 Length defaults to 40, because 91 distinct chars are available.
 
 ```
-s7YRg_L!5,b10e9{R57842/5]/3@2Fc3y57i[3g\
+95VlP}C~uHw737KyPS-0Fb36TT8CGeNz4,hx;s[O
 ```
 
-#### `pwgen -a`
+#### `pwgrs -a`
 
 Length defaults to 55, because 26 distinct chars are available.
 
 ```
-cqkptjdawtbzmcdojiqwtcabvkragecntdctxwvwhtwbhgxdnfshvyj
+jvvntwckazacgdizlebskxmwqesapelcdbdcxaqcxkheznvfsgzdsbc
 ```
 
-#### `pwgen -A`
+#### `pwgrs -A`
 
 Length defaults to 55, because 26 distinct chars are available
 
 ```
-GZWHIQEZMWJSAPPIULBYHIRMGJHYFKERLDYTABWFIKICTCJACTGIWEZ
+OWLMMTRJOQFPABBHVBQFCQKZEXNWJIFOSDYZWBJSDXSUUQBDOJXXGDP
 ```
 
-#### `pwgen -Aa`
+#### `pwgrs -Aa`
 
 Length defaults to 45, because 52 distinct chars are available.
 
 ```
-qvaPlUtPsYpTDTYOPwBbFclwYNDjLUqdrAhRRLdQoyEZu
+huTjuxxLmiBsVxWQTlVVbezboZCBfAsjxHPSToHajPqIi
 ```
 
-#### `pwgen -n`
+#### `pwgrs -n`
 
 Length defaults to 78, because 10 distinct chars are available.
 
 ```
-292040492503533901251005568137604050532386930398662181203682665536587940100830
+122099737963124140099587161440104945150736189544627271670613369052503984616256
 ```
 
-#### `pwgen -s`
+#### `pwgrs -s`
 
 Length defaults to 53, because 29 distinct chars are available.
 
 ```
-)}:!([_[^<&;@>}>-~;=({@[\@>,[,~<\=?.=,*]#_(};.?;<~@^[
+;/&~]_[[[[]{^<%^;-*.*,;`-[|?|>/^~<:&/_<<=*\!>;[>?%~<(
 ```
 
-#### `pwgen -l 20`
+#### `pwgrs -l 20`
 
 Length is hard-set to 20.
 
 ```
-C4Y0iN77K*4^SzFeG{HY
+72T4M+w3[I2xCMvvCb]Y
 ```
 
-#### `pwgen -l 20 -c 5`
+#### `pwgrs -l 20 -c 5`
 
 ```
-X!Lv2|^;Z]Y[436Ven.F
-)({]+)30O*5mDi1UZl|l
-0`;OqE|r3~<v@=N8P5r}
-pQ6UmkIu3_7p#T_ZSDUa
-kucJ%~45g69Zan7-,Y7Q
+i*w:2BtH0KFegl.z91N8
+)9jRQF9RD5eq89\4LuD\
+_o|3E]pC^44R6M]43M[W
+27s+zgH0U3Et5o/l4zq7
+8g1`}/,0C0R\EB1uG{2+
 ```
 
 ### Sub commands
 
-#### `pwgen secret`
+#### `pwgrs secret`
 
 ```
-Lp47SqOH6BJYg59HDvYTP1zo1BpKa0hN51U6Rlrcb6n
+76mgeX1V4q64qdS0f0wZp72klQapsJ8b7At8vvl4XfR
 ```
 
-#### `pwgen wifi`
+#### `pwgrs wifi`
 
 ```
-3ehu-u4z2-jy09-107k
+wmy9-7bgq-g469-9h2r
 ```
