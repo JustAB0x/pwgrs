@@ -10,7 +10,7 @@ license=('MIT')
 depends=('gcc-libs')
 makedepends=('cargo')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/JustAB0x/$pkgname/archive/v$pkgver.tar.gz")
-sha512sums=('1798f5432b044711fb64fdcf640aab6559c5f38d9959f8ef41649855c652bc0a77b59ca321c9420b07228dabc904ee6d2e6637576089f3dee606e0e8694a238c')
+sha512sums=('2563fccab087cf151a92c00e84a6fcf1c25af6ae78c7ea6220e4b80b0634c72c1320fa327c694842f57ad42b321421e0748f52c0053a3288028d0972ec3ce5b6')
 options=(!lto)
 
 build() {
