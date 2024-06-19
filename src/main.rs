@@ -1,6 +1,5 @@
-use clipboard::ClipboardContext;
-use clipboard::ClipboardProvider;
 use pwgrs::*;
+use arboard::Clipboard;
 use std::process;
 
 fn main() {
@@ -12,11 +11,8 @@ fn main() {
       // If there is only one password being returned, copy it to clipboard
       // before printing to stdout.
       if passwords.len() == 1 {
-        let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
-        if let Err(e) = ctx.set_contents(passwords[0].clone()) {
-          eprintln!("Could not copy password to clipboard: {}", e);
-          process::exit(1);
-        }
+        let mut clipboard = Clipboard::new().unwrap();
+        clipboard.set_text(passwords[0].clone()).unwrap();
       }
 
       for pass in passwords {

@@ -3,7 +3,7 @@ mod consts;
 mod options;
 
 extern crate clap;
-extern crate clipboard;
+extern crate arboard;
 
 pub use crate::charset::*;
 pub use crate::consts::*;

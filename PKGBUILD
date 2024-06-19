@@ -1,7 +1,7 @@
 # Maintainer: Box <box@sysn.co.uk>
 
 pkgname=pwgrs
-pkgver=1.1.1
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="pwgrs is a command line tool which allows to creat secure passwords/secrets from the command line, written in rust, duh."
 arch=('x86_64')
