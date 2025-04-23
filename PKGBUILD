@@ -3,14 +3,14 @@
 pkgname=pwgrs
 pkgver=1.3.2
 pkgrel=1
-pkgdesc="pwgrs is a command line tool which allows to creat secure passwords/secrets from the command line with smart defaults and a built-in copy-to-clipboard feature, written in rust."
+pkgdesc="pwgrs is a command line tool which creates secure passwords/secrets from the command line with sensible defaults and a built-in copy-to-clipboard feature, written in rust."
 arch=('x86_64')
 url="https://github.com/JustAB0x/pwgrs/"
 license=('MIT' 'custom')
 depends=('gcc-libs')
 makedepends=('rust')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/JustAB0x/$pkgname/archive/v$pkgver.tar.gz")
-sha512sums=('5b5de3f0ee0ae7763282c1932c264c3ea351f2966f265ea2d8506a20d4b246e635ea26eb32d87ac4b5e183b325e1cbad086d278aae8f8e62c5c8fd8693914082')
+sha512sums=('a5adfa3228b809592f55f415fca54c8feb4e512883f93792f65578b588f3a52a51076d19c8440654a791f02b2fb9cbbd4e2207845262a5f592dcda9cbad903e5')
 options=(!lto)
 
 prepare() {

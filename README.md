@@ -1,6 +1,6 @@
 # @pwgrs
 
-CLI password generator with smart defaults and a built-in copy-to-clipboard feature.
+CLI password generator with sensible defaults and a built-in copy-to-clipboard feature.
 
 ## Usage
 
