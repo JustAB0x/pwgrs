@@ -1,27 +1,27 @@
-use pwgrs::*;
-use arboard::Clipboard;
-use std::process;
+mod config;
+mod generator;
 
-fn main() {
-  // Parse cli arguments
-  let options = pwgrs::Options::from_args();
+use crate::config::Config;
+use crate::generator::{calculate_entropy, generate_password};
+use clap::Parser;
+use rand_chacha::ChaCha20Rng;
+use rand::SeedableRng;
 
-  match run(&options) {
-    Ok(passwords) => {
-      // If there is only one password being returned, copy it to clipboard
-      // before printing to stdout.
-      if passwords.len() == 1 {
-        let mut clipboard = Clipboard::new().unwrap();
-        clipboard.set_text(passwords[0].clone()).unwrap();
-      }
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let config = Config::parse();
+    let mut rng = ChaCha20Rng::from_entropy();
+    let password = generate_password(&config, &mut rng)
+        .map_err(|e| format!("Error generating password: {}", e))?;
 
-      for pass in passwords {
-        println!("{}", pass);
-      }
-    }
-    Err(e) => {
-      eprintln!("Application error: {}", e);
-      process::exit(1);
-    }
-  }
+    println!("Generated password: {}", password);
+
+    let charset_size = [!config.no_lowercase as usize * generator::LOWERCASE.len(),
+                        !config.no_uppercase as usize * generator::UPPERCASE.len(),
+                        !config.no_numbers as usize * generator::NUMBERS.len(),
+                        !config.no_symbols as usize * generator::SYMBOLS.len()]
+        .iter().sum::<usize>();
+    let entropy = calculate_entropy(config.length, charset_size);
+    println!("Password entropy: {:.2} bits", entropy);
+
+    Ok(())
 }
