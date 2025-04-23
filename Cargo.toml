@@ -8,9 +8,6 @@ edition = "2021"
 name = "pwgrs"
 path = "src/main.rs"
 
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
 rand = "0.9.1"
 clap = "4.5.7"

@@ -27,9 +27,9 @@ Options:
 
 ## Defaults
 
-If you run `pwgrs` without a `--length` option it will determine the length based on the available charsets to get to **at least 256 bits of entropy**. The less different characters that are available through those charsets, the longer the resulting password will get.
+If you run `pwgrs` without the `-l` / `--length` option it will determine the length based on the selected charsets to get **at least 256 bits of entropy**. Fewer charsets selected, will result in a longer password.
 
-Without charset flags (`-a`, `-A`, `-n`, or `-s`) present, it uses all possible charsets.
+Without any charset flags (`-a`, `-A`, `-n`, or `-s`) set, all possible charsets will be used.
 
 ## Examples
 
@@ -38,7 +38,7 @@ Without charset flags (`-a`, `-A`, `-n`, or `-s`) present, it uses all possible 
 Length defaults to 40, because 91 distinct chars are available.
 
 ```
-95VlP}C~uHw737KyPS-0Fb36TT8CGeNz4,hx;s[O
+3W56|R\8DQz]?qV9Gv@Wi%s!*~d12_*mZ&qTm?Q?
 ```
 
 #### `pwgrs -a`
@@ -46,7 +46,7 @@ Length defaults to 40, because 91 distinct chars are available.
 Length defaults to 55, because 26 distinct chars are available.
 
 ```
-jvvntwckazacgdizlebskxmwqesapelcdbdcxaqcxkheznvfsgzdsbc
+aachgovgbekfrgebxfscruwjgrmzzxsicakzwqtlcrwarpqntkpvydk
 ```
 
 #### `pwgrs -A`
@@ -54,7 +54,7 @@ jvvntwckazacgdizlebskxmwqesapelcdbdcxaqcxkheznvfsgzdsbc
 Length defaults to 55, because 26 distinct chars are available
 
 ```
-OWLMMTRJOQFPABBHVBQFCQKZEXNWJIFOSDYZWBJSDXSUUQBDOJXXGDP
+YPFNCITWYLOGEEIPLWUWIOUJDTIVJFRTXQSDAORFOGXFUHZFLDYXKZY
 ```
 
 #### `pwgrs -Aa`
@@ -62,7 +62,7 @@ OWLMMTRJOQFPABBHVBQFCQKZEXNWJIFOSDYZWBJSDXSUUQBDOJXXGDP
 Length defaults to 45, because 52 distinct chars are available.
 
 ```
-huTjuxxLmiBsVxWQTlVVbezboZCBfAsjxHPSToHajPqIi
+ugSVnQabbnkKhxdCrhleBCyUnlLqUojUMVTUnJSfMHTTJ
 ```
 
 #### `pwgrs -n`
@@ -70,15 +70,15 @@ huTjuxxLmiBsVxWQTlVVbezboZCBfAsjxHPSToHajPqIi
 Length defaults to 78, because 10 distinct chars are available.
 
 ```
-122099737963124140099587161440104945150736189544627271670613369052503984616256
+404033964956362206872986540699097332184979913456121844514705164504017662414846
 ```
 
 #### `pwgrs -s`
 
-Length defaults to 53, because 29 distinct chars are available.
+Length defaults to 54, because 29 distinct chars are available.
 
 ```
-;/&~]_[[[[]{^<%^;-*.*,;`-[|?|>/^~<:&/_<<=*\!>;[>?%~<(
+)<:}=_)=/{@!:/[/[.\])-^~</<,)>.\,}=^*(&}([&#_,=&^\&|(=
 ```
 
 #### `pwgrs -l 20`
@@ -86,17 +86,17 @@ Length defaults to 53, because 29 distinct chars are available.
 Length is hard-set to 20.
 
 ```
-72T4M+w3[I2xCMvvCb]Y
+?vi_H1tH6_F}1a3.5lnO
 ```
 
 #### `pwgrs -l 20 -c 5`
 
 ```
-i*w:2BtH0KFegl.z91N8
-)9jRQF9RD5eq89\4LuD\
-_o|3E]pC^44R6M]43M[W
-27s+zgH0U3Et5o/l4zq7
-8g1`}/,0C0R\EB1uG{2+
+33gM6q_NY+)QmFu?hSon
+1!sF~127(&Sb[2b)c/J}
+9hi0yjw_bGOF92LIph=0
+#1mMVsk5I7e&sfg>p9U0
+M5WdLId/00!}h=v741mN
 ```
 
 ### Sub commands
@@ -104,11 +104,11 @@ _o|3E]pC^44R6M]43M[W
 #### `pwgrs secret`
 
 ```
-76mgeX1V4q64qdS0f0wZp72klQapsJ8b7At8vvl4XfR
+o93Zwf73lNphrq997mt76j0c5M1P7IQnyG86rDCBf98
 ```
 
 #### `pwgrs wifi`
 
 ```
-wmy9-7bgq-g469-9h2r
+2fad-03e3-930h-ko1s
 ```

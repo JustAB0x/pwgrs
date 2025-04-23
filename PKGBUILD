@@ -1,9 +1,9 @@
 # Maintainer: Box <box@sysn.co.uk>
 
 pkgname=pwgrs
-pkgver=1.2.0
+pkgver=1.3.2
 pkgrel=1
-pkgdesc="pwgrs is a command line tool which allows to creat secure passwords/secrets from the command line with smart defaults and a built-in copy-to-clipboard feature, written in rust, duh."
+pkgdesc="pwgrs is a command line tool which allows to creat secure passwords/secrets from the command line with smart defaults and a built-in copy-to-clipboard feature, written in rust."
 arch=('x86_64')
 url="https://github.com/JustAB0x/pwgrs/"
 license=('MIT' 'custom')
