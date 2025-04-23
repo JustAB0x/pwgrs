@@ -12,7 +12,7 @@ pub const CHARSET_ALPHABET_UPPERCASE: [char; 26] = [
 
 pub const CHARSET_NUMBERS: [char; 10] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-pub const CHARSET_SPECIAL: [char; 29] = [
+pub const CHARSET_SPECIAL: [char; 28] = [
   '!', '\\', '#', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?',
-  '@', '[', ']', '^', '_', '`', '{', '|', '}', '~',
+  '@', '[', ']', '^', '_', '{', '|', '}', '~',
 ];
