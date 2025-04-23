@@ -23,7 +23,7 @@ impl Options {
     pub fn from_args() -> Options {
         // Define the main command and its arguments
         let matches = Command::new("pwgrs")
-            .version("1.2.0")
+            .version("1.3.1")
             .author("Box <box@sysn.co.uk")
             .about("Secure password generator")
             .arg(
