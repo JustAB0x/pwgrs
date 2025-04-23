@@ -10,8 +10,8 @@ pub use crate::consts::*;
 pub use crate::options::*;
 
 use rand::Rng;
-use rand_chacha::ChaCha20Rng;
-use rand::SeedableRng;
+use rand_chacha::*;
+use rand_core::SeedableRng;
 
 pub fn run(options: &Options) -> Result<Vec<String>, Box<dyn std::error::Error>> {
   match options.subcommand {
@@ -86,8 +86,8 @@ pub fn gen_password(options: &GeneratorOptions) -> String {
 }
 
 fn get_rand_charset(charsets: &Vec<Charset>) -> &Charset {
-  let mut rng = ChaCha20Rng::from_entropy();
-  let rand_index = rng.gen_range(0..charsets.len());
+  let mut rng = ChaCha20Rng::from_os_rng();
+  let rand_index = rng.random_range(0..charsets.len());
   &charsets[rand_index]
 }
 
