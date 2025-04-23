@@ -1,4 +1,4 @@
-use rand::{Rng, RngCore};
+use rand::Rng;
 use rand_chacha::ChaCha20Rng;
 
 pub const LOWERCASE: &[u8] = b"abcdefghjkmnpqrstuvwxyz";
