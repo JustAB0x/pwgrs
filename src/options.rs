@@ -21,17 +21,16 @@ pub enum SubCommand {
 
 impl Options {
     pub fn from_args() -> Options {
-        // Define the main command and its arguments
         let matches = Command::new("pwgrs")
-            .version("1.3.2")
-            .author("Box <box@sysn.co.uk")
+            .version("2.0.0")
+            .author("Box <box@sysn.co.uk>")
             .about("Secure password generator")
             .arg(
                 Arg::new("LENGTH")
                     .short('l')
                     .long("length")
                     .value_name("LENGTH")
-                    .num_args(1)  // Single value expected
+                    .num_args(1)
                     .help("Length of passwords"),
             )
             .arg(
@@ -39,38 +38,37 @@ impl Options {
                     .short('c')
                     .long("count")
                     .value_name("COUNT")
-                    .num_args(1)  // Single value expected
+                    .num_args(1)
                     .help("Amount of passwords"),
             )
             .arg(
                 Arg::new("ALPHABET")
                     .short('a')
                     .long("alphabet")
-                    .action(ArgAction::SetTrue)  // Set to true if present
+                    .action(ArgAction::SetTrue)
                     .help("Use ALPHABET (a-z) charset"),
             )
             .arg(
                 Arg::new("ALPHABET_UPPERCASE")
                     .short('A')
                     .long("alphabet-uppercase")
-                    .action(ArgAction::SetTrue)  // Set to true if present
+                    .action(ArgAction::SetTrue)
                     .help("Use ALPHABET_UPPERCASE (A-Z) charset"),
             )
             .arg(
                 Arg::new("NUMBERS")
                     .short('n')
                     .long("numbers")
-                    .action(ArgAction::SetTrue)  // Set to true if present
+                    .action(ArgAction::SetTrue)
                     .help("Use NUMBERS (0-9) charset"),
             )
             .arg(
                 Arg::new("SPECIAL")
                     .short('s')
                     .long("special")
-                    .action(ArgAction::SetTrue)  // Set to true if present
+                    .action(ArgAction::SetTrue)
                     .help("Use SPECIAL (*, %, -, ...) charset"),
             )
-            // Define the 'secret' subcommand and its arguments
             .subcommand(
                 Command::new("secret")
                     .about("Creates secret with at least 256 bits of entropy")
@@ -79,11 +77,10 @@ impl Options {
                             .short('c')
                             .long("count")
                             .value_name("COUNT")
-                            .num_args(1)  // Single value expected
+                            .num_args(1)
                             .help("Amount of secrets"),
                     ),
             )
-            // Define the 'wifi' subcommand and its arguments
             .subcommand(
                 Command::new("wifi")
                     .about("Creates a wifi friendly password")
@@ -92,7 +89,7 @@ impl Options {
                             .short('c')
                             .long("count")
                             .value_name("COUNT")
-                            .num_args(1)  // Single value expected
+                            .num_args(1)
                             .help("Amount of wifi friendly passwords"),
                     ),
             )
@@ -113,7 +110,6 @@ impl Options {
             charsets.push(Charset::new(&CHARSET_SPECIAL));
         }
 
-        // If the user passes no charset arguments, use default ones.
         if charsets.is_empty() {
             charsets.push(Charset::new(&CHARSET_ALPHABET));
             charsets.push(Charset::new(&CHARSET_ALPHABET_UPPERCASE));
@@ -121,7 +117,6 @@ impl Options {
             charsets.push(Charset::new(&CHARSET_SPECIAL));
         }
 
-        // Determine the subcommand and count
         let subcommand = match matches.subcommand() {
             Some(("secret", sub_matches)) => {
                 let count = get_count_from_matches(sub_matches);
@@ -137,10 +132,17 @@ impl Options {
             }
         };
 
-        // Determine the length for password generation
         let length = match matches.get_one::<String>("LENGTH") {
-            Some(len) => len.parse().expect("Length must be a number"),
-            None => get_length_for_entropy(MINIMUM_ENTROPY_IN_BITS, count_chars_in_charsets(&charsets)),
+            Some(len) => {
+                let parsed: u32 = len.parse().expect("Length must be a positive number");
+                if parsed == 0 {
+                    panic!("Length must be greater than 0");
+                }
+                parsed
+            }
+            None => {
+                get_length_for_entropy(MINIMUM_ENTROPY_IN_BITS, count_chars_in_charsets(&charsets))
+            }
         };
 
         Options {
@@ -150,11 +152,14 @@ impl Options {
     }
 }
 
-// Helper function to get the count from matches
 fn get_count_from_matches(matches: &ArgMatches) -> u32 {
-    matches
+    let count: u32 = matches
         .get_one::<String>("COUNT")
         .unwrap_or(&"1".to_string())
         .parse()
-        .expect("Count must be a number")
+        .expect("Count must be a positive number");
+    if count == 0 {
+        panic!("Count must be greater than 0");
+    }
+    count
 }
