@@ -1,6 +1,28 @@
 # pwgrs
 
-CLI password generator with sensible defaults and a built-in copy-to-clipboard feature.
+A secure command-line password generator built in Rust with sensible defaults and a built-in copy-to-clipboard feature.
+
+## Features
+
+- **Secure**: Uses ChaCha20 CSPRNG with OS entropy seeding per password
+- **EntropyCalculator**: Automatically calculates password length for desired entropy (default: 256 bits)
+- **Multiple modes**: Default, secret (256+ bits entropy), and WiFi-friendly (formatted)
+- **Flexible charsets**: Include/exclude letters, numbers, symbols
+- **Clipboard copy**: Single passwords are automatically copied to clipboard
+
+## Installation
+
+### From source
+
+```bash
+cargo install --git https://github.com/JustAB0x/pwgrs
+```
+
+### Arch Linux (AUR)
+
+```bash
+yay -S pwgrs
+```
 
 ## Usage
 
@@ -103,12 +125,27 @@ a#v<F)<nOOqXZ27yp0Cv
 
 #### `pwgrs secret`
 
+Length defaults to 55, because 36 distinct chars are available (at least 256 bits entropy).
+
 ```
 7Vh0o6f852375GFr1ZOlssZX2bNPIS5yTU0p2258DiJ
 ```
 
 #### `pwgrs wifi`
 
+Length defaults to 44, because 36 distinct chars are available (128 bits entropy).
+
 ```
 j527-graj-1t79-m4lx
 ```
+
+## License
+
+MIT or Unlicense (at your option)
+
+## Security
+
+- Uses `ChaCha20` cryptographically secure PRNG from `rand_chacha`
+- Seeded from OS entropy (`/dev/urandom`, `RandomSecure`, etc.)
+- One RNG instance per password generation
+- No password data stored or logged
