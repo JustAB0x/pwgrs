@@ -73,48 +73,72 @@ Without any charset flags (`-a`, `-A`, `-n`, `-s`), **all charsets are enabled**
 
 ## Examples
 
-### Generate 5 default passwords
+### Generate default password
 
 ```bash
-$ pwgrs -c 5
+$ pwgrs
 
-Ln29|6<<f:h8{~z2[~}W?aB<m0Huo3E4rnvDx86{
-18y<wG.n@G5O71WjoD8\,OW/IpIY2/}0,@F4Hy_t
-26fLwf9hiBQ[.9dxsYD.2;\7*}(Trj4hQFJpi3r=
-r)|y1o495N93z!KmiWC5eoMFSra}WQ2+Uc49r[N&
-cOOuwZ4+xK[tf,enwkI0_7j982N(2#|i7W6BRjc5
+S7RSC8[/KLO%l_d}5i)3;IcwJn#.,o*#T1-25:A]
 ```
 
-### Generate passwords with 20 characters
+### Generate lowercase password
+
+```bash
+$ pwgrs -a
+
+bhfxntyqiwxxyzedhvzofihfsheugguhjlvuylwxkzxubolnarwuvin
+```
+
+### Generate uppercase password
+
+```bash
+$ pwgrs -A
+
+NDPIJFSUUUQGPLXRYDILAPBVJSICPOGVQKAWCRKIJJAKGPSDRMKFJZC
+```
+
+### Generate mixed case password
+
+```bash
+$ pwgrs -A -a
+
+gkEHXbpySepuZwaaUDBbSZANHAeLuLWCBFyKnjMYARwMA
+```
+
+### Generate numbers-only password
+
+```bash
+$ pwgrs -n
+
+975187521195848424218005701516308518870283325553323169274729257723409149714427
+```
+
+### Generate special characters password
+
+```bash
+$ pwgrs -s
+
+\_[-\<=)/)~<,>@]{{|+{\?^\-=+[.|-_:+%.,==_))?.*<@=]/{^)
+```
+
+### Generate 20-character password
+
+```bash
+$ pwgrs -l 20
+
+fH}8IbI2r.RPWA6F8uA9
+```
+
+### Generate 5 passwords, 20 characters each
 
 ```bash
 $ pwgrs -l 20 -c 5
 
-&yK38&tA2.rU%,P*e=D>
-R&u>#f+BlimQdzv08BU/
-r>RjgD)gJ}s5f8_Q<NTw
-!w1ye63_O?=5DZ2&1{V1
-N{XBOx\G0yGpwA(29k2@
-```
-
-### Generate secrets with 256+ bits entropy
-
-```bash
-$ pwgrs secret -c 3
-
-CxWrw55JXR7ZGsO8L1MICYtlIR8BW7hA5gLIMW6RO50
-399mG9lXwZOzfRTn8ywUScYU1rJ70R359j26BZcggtV
-C21uh9FBwAlNHk2QOEonjHYxmX0KdQC76zH9r709ZBD
-```
-
-### Generate WiFi-friendly passwords
-
-```bash
-$ pwgrs wifi -c 3
-
-e8oc-285s-103c-322f
-j9wa-86k1-p25j-d5f6
-52nc-09mi-8256-bx03
+fR@DrEP)4~g(3-+&D|ea
+A6bvj?mvT71:mQ74>+22
+73!u89xYR#;jZwqL[qD(
+so&50&7;?31Z9<=I-6=9
+4=rG3E3;tPs\,l~ws_Gg
 ```
 
 ## Entropy Calculator
