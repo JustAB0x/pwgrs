@@ -57,7 +57,7 @@ pwgrs [OPTIONS] [COMMAND]
 Without `-l/--length`, pwgrs calculates the minimum length needed for **at least 256 bits of entropy**:
 
 | Charsets | Distinct chars | Default length |
-|----------|---------------|----------------|
+|----------|----------------|----------------|
 | All (-aAns) | 91 | 40 |
 | Lowercase only (-a) | 26 | 55 |
 | Uppercase only (-A) | 26 | 55 |
@@ -78,17 +78,23 @@ Without any charset flags (`-a`, `-A`, `-n`, `-s`), **all charsets are enabled**
 ```bash
 $ pwgrs -c 5
 
-{aH3U@M[8p5YbB8|vT2r$WcX8&K]5MfjG}WZmV+Kj
-7Lw}1QV|?Q|_vV2d@0B8rD}R4\4Sb8Z0cV]zU%j{
-1|e5Y\KtC8v2c2|9}2r}5M7kVt5[5]1{0|tVb5+D
-^bW2\JqX4Xk2}2s5\1k\0t]t0|v|7q9WwB6V4X2m
-Y2XbA4s4r7J5k222r2rW6XV4k15V5W2Y7X2K5V2X
+Ln29|6<<f:h8{~z2[~}W?aB<m0Huo3E4rnvDx86{
+18y<wG.n@G5O71WjoD8\,OW/IpIY2/}0,@F4Hy_t
+26fLwf9hiBQ[.9dxsYD.2;\7*}(Trj4hQFJpi3r=
+r)|y1o495N93z!KmiWC5eoMFSra}WQ2+Uc49r[N&
+cOOuwZ4+xK[tf,enwkI0_7j982N(2#|i7W6BRjc5
 ```
 
-### Generate 10 passwords with 50 characters using only letters
+### Generate passwords with 20 characters
 
 ```bash
-$ pwgrs -l 50 -a -A -c 10
+$ pwgrs -l 20 -c 5
+
+&yK38&tA2.rU%,P*e=D>
+R&u>#f+BlimQdzv08BU/
+r>RjgD)gJ}s5f8_Q<NTw
+!w1ye63_O?=5DZ2&1{V1
+N{XBOx\G0yGpwA(29k2@
 ```
 
 ### Generate secrets with 256+ bits entropy
@@ -96,9 +102,9 @@ $ pwgrs -l 50 -a -A -c 10
 ```bash
 $ pwgrs secret -c 3
 
-rC5f0m6wC92e1f4p2r4c4d7g1n2c5f0m6wC92e1f4p2r4c4d7g1n2c5f0m
-qB3d2m5wC82f1e4p3r3c3d6g2n1c4f3m5wB82e1f3p3r3c3d6g2n1c4f3m
-tE6j8n2wF92a3d7p6r6c6g9j4n7f6e2wZ92b3a6p6r6c6g9j4n7f6e2w
+CxWrw55JXR7ZGsO8L1MICYtlIR8BW7hA5gLIMW6RO50
+399mG9lXwZOzfRTn8ywUScYU1rJ70R359j26BZcggtV
+C21uh9FBwAlNHk2QOEonjHYxmX0KdQC76zH9r709ZBD
 ```
 
 ### Generate WiFi-friendly passwords
@@ -106,18 +112,9 @@ tE6j8n2wF92a3d7p6r6c6g9j4n7f6e2wZ92b3a6p6r6c6g9j4n7f6e2w
 ```bash
 $ pwgrs wifi -c 3
 
-a1b2-c3d4-e5f6-g7h8
-i9j0-k1l2-m3n4-o5p6
-q7r8-s9t0-u1v2-w3x4
-```
-
-### Generate a single password (auto-copied to clipboard)
-
-```bash
-$ pwgrs -l 30 -a -A -n
-
-K3n9Qw2R8t7Y6u5I4o3P2a1S0d9F8g
-# Copied to clipboard!
+e8oc-285s-103c-322f
+j9wa-86k1-p25j-d5f6
+52nc-09mi-8256-bx03
 ```
 
 ## Entropy Calculator
