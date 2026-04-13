@@ -1,114 +1,146 @@
-# @pwgrs
+# pwgrs
 
-CLI password generator with sensible defaults and a built-in copy-to-clipboard feature.
+A secure command-line password generator built in Rust with sensible defaults and a built-in copy-to-clipboard feature.
+
+## Features
+
+- **Secure**: Uses ChaCha20 CSPRNG with OS entropy seeding per password
+- **EntropyCalculator**: Automatically calculates password length for desired entropy (default: 256 bits)
+- **Multiple modes**: Default, secret (256+ bits entropy), and WiFi-friendly (formatted)
+- **Flexible charsets**: Include/exclude letters, numbers, symbols
+- **Clipboard copy**: Single passwords are automatically copied to clipboard
+- **Cross-platform**: Works on Linux, macOS, and Windows
+
+## Installation
+
+### From source
+
+```bash
+cargo install --git https://github.com/JustAB0x/pwgrs
+```
+
+### Arch Linux (AUR)
+
+```bash
+yay -S pwgrs
+```
 
 ## Usage
 
+```bash
+pwgrs [OPTIONS] [COMMAND]
 ```
-Secure password generator
 
-Usage: pwgrs [OPTIONS] [COMMAND]
+### Commands
 
-Commands:
-  secret  Creates secret with at least 256 bits of entropy
-  wifi    Creates a wifi friendly password
-  help    Print this message or the help of the given subcommand(s)
+- `secret` - Creates secrets with at least 256 bits of entropy
+- `wifi` - Creates WiFi-friendly passwords (formatted: XXXX-XXXX-XXXX-XXXX)
+- `help` - Print this message or the help of the given subcommand(s)
 
-Options:
-  -l, --length <LENGTH>     Length of passwords
-  -c, --count <COUNT>       Amount of passwords
-  -a, --alphabet            Use ALPHABET (a-z) charset
-  -A, --alphabet-uppercase  Use ALPHABET_UPPERCASE (A-Z) charset
-  -n, --numbers             Use NUMBERS (0-9) charset
-  -s, --special             Use SPECIAL (*, %, -, ...) charset
-  -h, --help                Print help
-  -V, --version             Print version
-```
+### Options
+
+| Option | Description |
+|--------|-------------|
+| `-l, --length <LENGTH>` | Length of passwords |
+| `-c, --count <COUNT>` | Amount of passwords to generate |
+| `-a, --alphabet` | Use lowercase letters (a-z) |
+| `-A, --alphabet-uppercase` | Use uppercase letters (A-Z) |
+| `-n, --numbers` | Use numbers (0-9) |
+| `-s, --special` | Use special characters (*, %, -, etc.) |
+| `-h, --help` | Print help information |
+| `-V, --version` | Print version information |
 
 ## Defaults
 
-If you run `pwgrs` without the `-l` / `--length` option it will determine the length based on the selected charsets to get **at least 256 bits of entropy**. Fewer charsets selected, will result in a longer password.
+### Length calculation
 
-Without any charset flags (`-a`, `-A`, `-n`, or `-s`) set, all possible charsets will be used.
+Without `-l/--length`, pwgrs calculates the minimum length needed for **at least 256 bits of entropy**:
+
+| Charsets | Distinct chars | Default length |
+|----------|---------------|----------------|
+| All (-aAns) | 91 | 40 |
+| Lowercase only (-a) | 26 | 55 |
+| Uppercase only (-A) | 26 | 55 |
+| Numbers only (-n) | 10 | 78 |
+| Numbers + lowercase (-an) | 36 | 46 |
+| Special only (-s) | 29 | 54 |
+
+Fewer charsets = longer required password
+
+### Charset defaults
+
+Without any charset flags (`-a`, `-A`, `-n`, `-s`), **all charsets are enabled**.
 
 ## Examples
 
-#### `pwgrs`
+### Generate 5 default passwords
 
-Length defaults to 40, because 91 distinct chars are available.
+```bash
+$ pwgrs -c 5
 
-```
-3W56|R\8DQz]?qV9Gv@Wi%s!*~d12_*mZ&qTm?Q?
-```
-
-#### `pwgrs -a`
-
-Length defaults to 55, because 26 distinct chars are available.
-
-```
-aachgovgbekfrgebxfscruwjgrmzzxsicakzwqtlcrwarpqntkpvydk
+{aH3U@M[8p5YbB8|vT2r$WcX8&K]5MfjG}WZmV+Kj
+7Lw}1QV|?Q|_vV2d@0B8rD}R4\4Sb8Z0cV]zU%j{
+1|e5Y\KtC8v2c2|9}2r}5M7kVt5[5]1{0|tVb5+D
+^bW2\JqX4Xk2}2s5\1k\0t]t0|v|7q9WwB6V4X2m
+Y2XbA4s4r7J5k222r2rW6XV4k15V5W2Y7X2K5V2X
 ```
 
-#### `pwgrs -A`
+### Generate 10 passwords with 50 characters using only letters
 
-Length defaults to 55, because 26 distinct chars are available
-
-```
-YPFNCITWYLOGEEIPLWUWIOUJDTIVJFRTXQSDAORFOGXFUHZFLDYXKZY
+```bash
+$ pwgrs -l 50 -a -A -c 10
 ```
 
-#### `pwgrs -Aa`
+### Generate secrets with 256+ bits entropy
 
-Length defaults to 45, because 52 distinct chars are available.
+```bash
+$ pwgrs secret -c 3
 
-```
-ugSVnQabbnkKhxdCrhleBCyUnlLqUojUMVTUnJSfMHTTJ
-```
-
-#### `pwgrs -n`
-
-Length defaults to 78, because 10 distinct chars are available.
-
-```
-404033964956362206872986540699097332184979913456121844514705164504017662414846
+rC5f0m6wC92e1f4p2r4c4d7g1n2c5f0m6wC92e1f4p2r4c4d7g1n2c5f0m
+qB3d2m5wC82f1e4p3r3c3d6g2n1c4f3m5wB82e1f3p3r3c3d6g2n1c4f3m
+tE6j8n2wF92a3d7p6r6c6g9j4n7f6e2wZ92b3a6p6r6c6g9j4n7f6e2w
 ```
 
-#### `pwgrs -s`
+### Generate WiFi-friendly passwords
 
-Length defaults to 54, because 29 distinct chars are available.
+```bash
+$ pwgrs wifi -c 3
 
-```
-)<:}=_)=/{@!:/[/[.\])-^~</<,)>.\,}=^*(&}([&#_,=&^\&|(=
-```
-
-#### `pwgrs -l 20`
-
-Length is hard-set to 20.
-
-```
-?vi_H1tH6_F}1a3.5lnO
+a1b2-c3d4-e5f6-g7h8
+i9j0-k1l2-m3n4-o5p6
+q7r8-s9t0-u1v2-w3x4
 ```
 
-#### `pwgrs -l 20 -c 5`
+### Generate a single password (auto-copied to clipboard)
 
-```
-33gM6q_NY+)QmFu?hSon
-1!sF~127(&Sb[2b)c/J}
-9hi0yjw_bGOF92LIph=0
-#1mMVsk5I7e&sfg>p9U0
-M5WdLId/00!}h=v741mN
-```
+```bash
+$ pwgrs -l 30 -a -A -n
 
-### Sub commands
-
-#### `pwgrs secret`
-
-```
-o93Zwf73lNphrq997mt76j0c5M1P7IQnyG86rDCBf98
+K3n9Qw2R8t7Y6u5I4o3P2a1S0d9F8g
+# Copied to clipboard!
 ```
 
-#### `pwgrs wifi`
+## Entropy Calculator
+
+The password length is calculated using:
 
 ```
-2fad-03e3-930h-ko1s
+length = ceil(bits * log(2) / log(charset_size))
 ```
+
+For 256 bits of entropy:
+- 26 chars (letters): `ceil(256 * 0.693 / 3.258) = 55`
+- 10 chars (numbers): `ceil(256 * 0.693 / 2.303) = 78`
+- 62 chars (letters+numbers): `ceil(256 * 0.693 / 4.127) = 43`
+- 91 chars (all): `ceil(256 * 0.693 / 4.511) = 40`
+
+## License
+
+MIT or Unlicense (at your option)
+
+## Security
+
+- Uses `ChaCha20` cryptographically secure PRNG from `rand_chacha`
+- Seeded from OS entropy (`/dev/urandom`, `RandomSecure`, etc.)
+- One RNG instance per password generation
+- No password data stored or logged
