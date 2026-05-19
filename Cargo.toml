@@ -9,7 +9,7 @@ name = "pwgrs"
 path = "src/main.rs"
 
 [dependencies]
-rand = "0.9.1"
+rand = "0.9.3"
 clap = "4.5.7"
 arboard = "3.4.0"
 rand_chacha = "0.9.0"
