@@ -15,15 +15,7 @@ pub fn run(options: &Options) -> Result<Vec<String>, Box<dyn std::error::Error>>
 
     match options.subcommand {
         SubCommand::None(count) => {
-            if count == 1 {
-                Ok(vec![gen_password(&options.generator_options, &mut rng)])
-            } else {
-                let mut pass_list: Vec<String> = Vec::new();
-                for _ in 0..count {
-                    pass_list.push(gen_password(&options.generator_options, &mut rng));
-                }
-                Ok(pass_list)
-            }
+            Ok((0..count).map(|_| gen_password(&options.generator_options, &mut rng)).collect())
         }
 
         SubCommand::Secret(count) => {
@@ -32,19 +24,14 @@ pub fn run(options: &Options) -> Result<Vec<String>, Box<dyn std::error::Error>>
                 Charset::new(&CHARSET_ALPHABET_UPPERCASE),
                 Charset::new(&CHARSET_NUMBERS),
             ];
-            let options = GeneratorOptions {
+            let opts = GeneratorOptions {
                 length: get_length_for_entropy(
                     MINIMUM_ENTROPY_IN_BITS,
                     count_chars_in_charsets(&charsets),
                 ),
                 charsets,
             };
-
-            let mut pass_list: Vec<String> = Vec::new();
-            for _ in 0..count {
-                pass_list.push(gen_password(&options, &mut rng));
-            }
-            Ok(pass_list)
+            Ok((0..count).map(|_| gen_password(&opts, &mut rng)).collect())
         }
 
         SubCommand::WiFi(count) => {
@@ -52,52 +39,33 @@ pub fn run(options: &Options) -> Result<Vec<String>, Box<dyn std::error::Error>>
                 Charset::new(&CHARSET_ALPHABET),
                 Charset::new(&CHARSET_NUMBERS),
             ];
-            let options = GeneratorOptions {
+            let opts = GeneratorOptions {
                 length: get_length_for_entropy(
                     WIFI_ENTROPY_IN_BITS,
                     count_chars_in_charsets(&charsets),
                 ),
                 charsets,
             };
-
-            let mut pass_list: Vec<String> = Vec::new();
-            for _ in 0..count {
-                let pass = gen_password(&options, &mut rng);
-                pass_list.push(format!(
-                    "{}-{}-{}-{}",
-                    &pass[0..4],
-                    &pass[4..8],
-                    &pass[8..12],
-                    &pass[12..16]
-                ));
-            }
-            Ok(pass_list)
+            Ok((0..count).map(|_| {
+                let pass = gen_password(&opts, &mut rng);
+                format!("{}-{}-{}-{}", &pass[0..4], &pass[4..8], &pass[8..12], &pass[12..16])
+            }).collect())
         }
     }
 }
 
 pub fn gen_password(options: &GeneratorOptions, rng: &mut ChaCha20Rng) -> String {
-    let mut password = String::new();
+    let all_chars: Vec<char> = options.charsets.iter()
+        .flat_map(|cs| cs.chars.iter().copied())
+        .collect();
 
-    for _ in 0..options.length {
-        let charset = get_rand_charset(&options.charsets, rng);
-        password.push(charset.get_rand_char(rng));
-    }
-
-    password
+    (0..options.length)
+        .map(|_| all_chars[rng.random_range(0..all_chars.len())])
+        .collect()
 }
 
-fn get_rand_charset<'a>(charsets: &'a Vec<Charset>, rng: &mut ChaCha20Rng) -> &'a Charset {
-    let rand_index = rng.random_range(0..charsets.len());
-    &charsets[rand_index]
-}
-
-pub fn count_chars_in_charsets(charsets: &Vec<Charset>) -> u32 {
-    let mut count: u32 = 0;
-    for charset in charsets {
-        count += charset.chars.len() as u32;
-    }
-    count
+pub fn count_chars_in_charsets(charsets: &[Charset]) -> u32 {
+    charsets.iter().map(|cs| cs.chars.len() as u32).sum()
 }
 
 pub fn get_length_for_entropy(bits: u32, distinct_chars: u32) -> u32 {

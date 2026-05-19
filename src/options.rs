@@ -22,7 +22,7 @@ pub enum SubCommand {
 impl Options {
     pub fn from_args() -> Options {
         let matches = Command::new("pwgrs")
-            .version("2.0.0")
+            .version(env!("CARGO_PKG_VERSION"))
             .author("Box <box@sysn.co.uk>")
             .about("Secure password generator")
             .arg(
